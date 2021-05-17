@@ -23,16 +23,15 @@ ano=local->tm_year+1900;
 		
 int i,opcoes_iniciais, opcao_cliente, opcao_voluntario, opcao_funcionario, mat_funcionario, id_vol, id_cli, dia_nasc_vol[10], dia_nasc_cli[10], dia_nasc_func;
 int mes_nasc_vol[10], mes_nasc_cli[10], mes_nasc_func, ano_nasc_vol[10], ano_nasc_cli[10], ano_nasc_func, idade_vol[10], idade_cli[10], idade_func;
-int escolha_quipamento, cliente_cadastrado, cadastro_vol, cadastro_cli, media_idade_vol, media_idade_cli, qtde_servicos, solicitacao_func;
-int aux_idade_vol, aux_vol, aux_idade_cli, aux_cli, aux_servico;
+int escolha_quipamento, cliente_cadastrado, cadastro_vol, cadastro_cli, qtde_servicos=0, solicitacao_func;
+int aux_idade_vol=0, aux_vol=0, aux_idade_cli=0, aux_cli=0, aux_servico;
+float media_idade_vol, media_idade_cli;
 char sexo_vol[10], sexo_cli[10], menu_princ;
 char nome_voluntario[10][100], nome_cliente[10][100], nome_funcionario[100], endereco_vol[10][100], endereco_cli[10][100], endereco_func[100];
 char bairro_vol[10][20], bairro_cli[10][20], bairro_func[20], municipio_vol[10][50], municipio_cli[10][50], municipio_func[50], uf_vol[10][2], uf_cli[10][2], uf_func[2];
 char cep_vol[10][9], cep_cli[10][9], cep_func[9], cpf_vol[10][10], cpf_cli[10][10], cpf_func[10], email_vol[10][100], email_cli[10][100], email_func[100];
 
-// do-while para voltar ao menu
-
-do{
+do{// do-while para voltar ao menu
 printf("*****************************************************************\n");
 printf("****************   Bem-vindo ao Amigo Tech!   *******************\n");	
 printf("*****************************************************************\n\n\n");
@@ -94,7 +93,7 @@ switch(opcoes_iniciais){
 				
 						do{	
 						if(i == 1){
-							printf("Qual é o seu nome completo?\n"); // Cadastrando o voluntário no sistma
+									printf("Qual é o seu nome completo?\n"); // Cadastrando o voluntário no sistma
 									fgets(nome_cliente[i],100,stdin);
 									fflush(stdin);
 									
@@ -271,16 +270,11 @@ switch(opcoes_iniciais){
 			
 			media_idade_vol = aux_idade_vol/aux_vol;
 			media_idade_cli = aux_idade_cli/aux_cli;
-			
-			printf("Total idade vol: %d", aux_idade_vol);
-			printf("Total idade cli: %d", aux_idade_cli);
-			printf("Total vol: %d", aux_vol);
-			printf("Total cli: %d", aux_cli);
-			
+						
 			if(solicitacao_func==1)
-				printf("\nA média de idade dos voluntários cadastrados é: %.1d\n", media_idade_vol);
+				printf("\nA média de idade dos voluntários cadastrados é: %.1f\n", media_idade_vol);
 				else if(solicitacao_func==2)
-					printf("\nA média de idade dos clientes cadastrados é: %.1d\n", media_idade_cli);
+					printf("\nA média de idade dos clientes cadastrados é: %.1f\n", media_idade_cli);
 					else printf("\nA quantidade de serviços solicitados é: %d\n", qtde_servicos);
 					
 			system("pause");
