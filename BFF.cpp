@@ -34,13 +34,13 @@ char cep_vol[10][9], cep_cli[10][9], cep_func[9], cpf_vol[10][10], cpf_cli[10][1
 
 do{
 printf("*****************************************************************\n");
-printf("*******************BEM-VINDO AO TECH FRIEND!*********************\n");	
+printf("*******************BEM-VINDO AO Amigo Tech!*********************\n");	
 printf("*****************************************************************\n\n\n");
 
 printf("Escolha uma das opções abaixo:\n\n");
 printf("Você precisa de um Amigo Tech?\nDigite 1\n\n");
 printf("Você gostaria de se tornar um Amigo Tech?\nDigite 2\n\n");
-printf("Portal do Funcionário TECH FRIEND\nDigite 3\n\n");
+printf("Portal do Funcionário Amigo Tech\nDigite 3\n\n");
 printf("Digite a opção desejada: ");
 scanf("%d", &opcoes_iniciais);
 fflush(stdin);
