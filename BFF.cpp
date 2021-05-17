@@ -49,23 +49,7 @@ system("cls");
 
 switch(opcoes_iniciais){
 	
-	case 1: printf("Entendido!\nVamos encontrar um amigo agora mesmo, mas para isso precisamos saber qual a ajuda que está precisando no momento.\n");
-			
-			printf("Escolha a opção desejada:\n\n");
-			
-			printf("Utilização de equipamentos eletrônicos\nDigite 1\n\nNavegar na Web\nDigite 2\n\nInstalação de equipamentos\nDigite 3\n\nCompanhia para jogos ou bate-papo\nDigite 4\n");
-			scanf("%d", &opcao_cliente);
-			
-				do{
-					
-					if(opcao_cliente<1 && opcao_cliente>4)
-						printf("Opção Inválida!\n\nInforme a opção desejada: ");
-						scanf("%d", &opcao_cliente);
-						fflush(stdin);
-						
-				}while(opcao_cliente<1 && opcao_cliente>4);
-			
-			printf("Muito bem.\n\nJá é cadastrado?\nDigite 1\n\nPara se cadastrar digite 2\n\nInforme a opção desejada: ");
+	case 1: printf("Muito bem.\n\nDigite 1 se já for cadastrado\n\nDigite 2 para se cadastrar\n\nInforme a opção desejada: ");
 			scanf("%d", &cliente_cadastrado);
 			fflush(stdin);
 			
@@ -73,19 +57,38 @@ switch(opcoes_iniciais){
 			
 			switch(cliente_cadastrado){
 				
-				case 1: if(opcao_cliente==1){printf("Para qual equipamento eletrônico necessita auxilio?\n\nComputador? Digite 1");
+				case 1: printf("Entendido!\nVamos encontrar um amigo agora mesmo, mas para isso precisamos saber qual a ajuda que está precisando no momento.\n");
+			
+						printf("Escolha a opção desejada:\n\n");
+						
+						printf("Utilização de equipamentos eletrônicos\nDigite 1\n\nNavegar na Web\nDigite 2\n\nInstalação de equipamentos\nDigite 3\n\nCompanhia para jogos ou bate-papo\nDigite 4\n\nInforme a opção desejada: ");
+						scanf("%d", &opcao_cliente);
+						fflush(stdin);
+							
+							while(opcao_cliente<1 && opcao_cliente>4){	
+								if(opcao_cliente<1 && opcao_cliente>4)
+									printf("Opção Inválida!\n\nInforme a opção desejada: ");
+									scanf("%d", &opcao_cliente);
+									fflush(stdin);
+								}
+						
+						system("cls");
+				
+				if(opcao_cliente==1){printf("Para qual equipamento eletrônico necessita auxilio?\n\nComputador? Digite 1");
 									printf("\nTV? Digite 2\nCelular? Digite 3\nEletrodomésticos? Digite 4\n\nInforme a opção desejada: ");
 									scanf("%d", &escolha_quipamento);
 									fflush(stdin);
 									
 									qtde_servicos++;
 									}																											
-							else {printf("Iremos direcionar sua solicitação ao voluntário disponível \ne ele irá entrar em contato pelo seu telefone para agendar o dia e hora de atendimento");
-								  printf("\nObrigado por utilizar os serviços da Amigo Tech!");
+							else { system("cls");
+								  printf("Iremos direcionar sua solicitação ao voluntário disponível \ne ele irá entrar em contato pelo seu telefone para agendar o dia e hora de atendimento");
+								  printf("\nObrigado por utilizar os serviços da Amigo Tech!\n");
 								  
 								  qtde_servicos++;}
+						system("cls");
 						printf("Iremos direcionar sua solicitação ao voluntário disponível \ne ele irá entrar em contato pelo seu telefone para agendar o dia e hora de atendimento");
-						 printf("\nObrigado por utilizar os serviços da Amigo Tech!");break;
+						printf("\nObrigado por utilizar os serviços da Amigo Tech!\n");break;
 			
 				case 2: i = 1;
 				
@@ -162,7 +165,7 @@ switch(opcoes_iniciais){
 						
 						system("cls");
 						
-						printf("Volte ao menu principal para solicitar o serviço como cliente cadastrado");
+						printf("Volte ao menu principal para solicitar o serviço como cliente cadastrado\n\n");
 						
 					}while(i==1);
 				break;	
@@ -269,11 +272,16 @@ switch(opcoes_iniciais){
 			media_idade_vol = aux_idade_vol/aux_vol;
 			media_idade_cli = aux_idade_cli/aux_cli;
 			
+			printf("Total idade vol: %d", aux_idade_vol);
+			printf("Total idade cli: %d", aux_idade_cli);
+			printf("Total vol: %d", aux_vol);
+			printf("Total cli: %d", aux_cli);
+			
 			if(solicitacao_func==1)
-				printf("\nA média de idade dos voluntários cadastrados é: %.1d", media_idade_vol);
+				printf("\nA média de idade dos voluntários cadastrados é: %.1d\n", media_idade_vol);
 				else if(solicitacao_func==2)
-					printf("\nA média de idade dos clientes cadastrados é: %.1d", media_idade_cli);
-					else printf("\nA quantidade de serviços solicitados é: %d", qtde_servicos);
+					printf("\nA média de idade dos clientes cadastrados é: %.1d\n", media_idade_cli);
+					else printf("\nA quantidade de serviços solicitados é: %d\n", qtde_servicos);
 					
 			system("pause");
 			
