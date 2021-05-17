@@ -58,12 +58,12 @@ switch(opcoes_iniciais){
 			
 				do{
 					
-					if(opcao_cliente<1 || opcao_cliente>4)
+					if(opcao_cliente<1 && opcao_cliente>4)
 						printf("Opção Inválida!\n\nInforme a opção desejada: ");
 						scanf("%d", &opcao_cliente);
 						fflush(stdin);
 						
-				}while(opcao_cliente<1 || opcao_cliente>4);
+				}while(opcao_cliente<1 && opcao_cliente>4);
 			
 			printf("Muito bem.\n\nJá é cadastrado?\nDigite 1\n\nPara se cadastrar digite 2\n\nInforme a opção desejada: ");
 			scanf("%d", &cliente_cadastrado);
@@ -71,8 +71,9 @@ switch(opcoes_iniciais){
 			
 			system("cls");
 			
-			if(cliente_cadastrado==1){
-				if(opcao_cliente==1){printf("Para qual equipamento eletrônico necessita auxilio?\n\nComputador? Digite 1");
+			switch(cliente_cadastrado){
+				
+				case 1: if(opcao_cliente==1){printf("Para qual equipamento eletrônico necessita auxilio?\n\nComputador? Digite 1");
 									printf("\nTV? Digite 2\nCelular? Digite 3\nEletrodomésticos? Digite 4\n\nInforme a opção desejada: ");
 									scanf("%d", &escolha_quipamento);
 									fflush(stdin);
@@ -80,90 +81,93 @@ switch(opcoes_iniciais){
 									qtde_servicos++;
 									}																											
 							else {printf("Iremos direcionar sua solicitação ao voluntário disponível \ne ele irá entrar em contato pelo seu telefone para agendar o dia e hora de atendimento");
-								  printf("Obrigada por utilizar os serviços da Amigo Tech!");
+								  printf("\nObrigado por utilizar os serviços da Amigo Tech!");
 								  
 								  qtde_servicos++;}
 						printf("Iremos direcionar sua solicitação ao voluntário disponível \ne ele irá entrar em contato pelo seu telefone para agendar o dia e hora de atendimento");
-								  printf("Obrigada por utilizar os serviços da Amigo Tech!");
-				} else
-				i = 1;
-				
-				do{	
-				if(i == 1){
-					printf("Qual é o seu nome completo?\n"); // Cadastrando o voluntário no sistma
-							fgets(nome_cliente[i],100,stdin);
-							fflush(stdin);
-							
-							printf("\nInforme seu endereço, Logradouro: ");
-							fgets(endereco_cli[i],100,stdin);
-							fflush(stdin);
-							
-							printf("\nBairro: ");
-							fgets(bairro_cli[i],20,stdin);
-							fflush(stdin);
-							
-							printf("\nMunicípio: ");
-							fgets(municipio_cli[i],50,stdin);
-							fflush(stdin);
-							
-							printf("\nUF: ");
-							fgets(uf_cli[i],2,stdin);
-							fflush(stdin);
-							
-							printf("\nCEP [11111-111]: ");
-							fgets(cep_cli[i],9,stdin);
-							fflush(stdin);
-							
-							printf("\nSexo [F|M]: ");
-							scanf("%c", &sexo_cli[i]);
-							fflush(stdin);
-								sexo_cli[i] = toupper(sexo_cli[i]);
-								
-							printf("\nDia de nascimento: ");
-							scanf("%d",&dia_nasc_cli[i]);
-							fflush(stdin);
-							
-							printf("\nMês de nascimento: ");
-							scanf("%d", &mes_nasc_cli[i]);
-							fflush(stdin);
-							
-							printf("\nAno de nascimento[AAAA]: ");
-							scanf("%d", &ano_nasc_cli[i]);
-							fflush(stdin);
-							// calculando a idade do voluntário
-								idade_cli[i] = ano-ano_nasc_cli[i];
-									
-									if(mes_nasc_cli[i]>mes)
-										idade_cli[i] = idade_cli[i]-1;
-										else if(mes_nasc_cli[i]==mes){
-												if(dia_nasc_cli[i]>dia)
-												idade_cli[i] = idade_cli[i]-1;
-												else idade_cli[i]=idade_cli[i];
-											}
-											else idade_cli[i]=idade_cli[i];
-							
-							printf("\nInforme o seu CPF [xxx.xxx.xxx-xx]: ");
-							fgets(cpf_cli[i],15,stdin);
-							fflush(stdin);
-							
-							printf("\nInforme seu e-mail: ");
-							fgets(email_cli[i],100,stdin);
-							fflush(stdin);
-							
-							aux_idade_cli = aux_idade_cli + idade_cli[i];
-							aux_cli++;
-							
-			//				printf("\nAnexar seu documento de identidade [RG e CPF ou CNH]");
-			//				fgets(dcto_cli,100,stdin); //pesquisar
-			//				fflush(stdin);
-				}
-				i=0;
-				
-				printf("Volte ao menu principal para solicitar o serviço como cliente cadastrado");
-				
-			}while(i==1);
-						
+						 printf("\nObrigado por utilizar os serviços da Amigo Tech!");break;
 			
+				case 2: i = 1;
+				
+						do{	
+						if(i == 1){
+							printf("Qual é o seu nome completo?\n"); // Cadastrando o voluntário no sistma
+									fgets(nome_cliente[i],100,stdin);
+									fflush(stdin);
+									
+									printf("\nInforme seu endereço, Logradouro: ");
+									fgets(endereco_cli[i],100,stdin);
+									fflush(stdin);
+									
+									printf("\nBairro: ");
+									fgets(bairro_cli[i],20,stdin);
+									fflush(stdin);
+									
+									printf("\nMunicípio: ");
+									fgets(municipio_cli[i],50,stdin);
+									fflush(stdin);
+									
+									printf("\nUF: ");
+									fgets(uf_cli[i],2,stdin);
+									fflush(stdin);
+									
+									printf("\nCEP [11111-111]: ");
+									fgets(cep_cli[i],9,stdin);
+									fflush(stdin);
+									
+									printf("\nSexo [F|M]: ");
+									scanf("%c", &sexo_cli[i]);
+									fflush(stdin);
+										sexo_cli[i] = toupper(sexo_cli[i]);
+										
+									printf("\nDia de nascimento: ");
+									scanf("%d",&dia_nasc_cli[i]);
+									fflush(stdin);
+									
+									printf("\nMês de nascimento: ");
+									scanf("%d", &mes_nasc_cli[i]);
+									fflush(stdin);
+									
+									printf("\nAno de nascimento[AAAA]: ");
+									scanf("%d", &ano_nasc_cli[i]);
+									fflush(stdin);
+									// calculando a idade do voluntário
+										idade_cli[i] = ano-ano_nasc_cli[i];
+											
+											if(mes_nasc_cli[i]>mes)
+												idade_cli[i] = idade_cli[i]-1;
+												else if(mes_nasc_cli[i]==mes){
+														if(dia_nasc_cli[i]>dia)
+														idade_cli[i] = idade_cli[i]-1;
+														else idade_cli[i]=idade_cli[i];
+													}
+													else idade_cli[i]=idade_cli[i];
+									
+									printf("\nInforme o seu CPF [xxx.xxx.xxx-xx]: ");
+									fgets(cpf_cli[i],15,stdin);
+									fflush(stdin);
+									
+									printf("\nInforme seu e-mail: ");
+									fgets(email_cli[i],100,stdin);
+									fflush(stdin);
+									
+									aux_idade_cli = aux_idade_cli + idade_cli[i];
+									aux_cli++;
+									
+					//				printf("\nAnexar seu documento de identidade [RG e CPF ou CNH]");
+					//				fgets(dcto_cli,100,stdin); //pesquisar
+					//				fflush(stdin);
+						}
+						i=0;
+						
+						system("cls");
+						
+						printf("Volte ao menu principal para solicitar o serviço como cliente cadastrado");
+						
+					}while(i==1);
+				break;	
+				default: printf("Opção inválida!");
+			}
 		;break;
 		
 	case 2: printf("Ok!\nPreciso saber alguns dados...\n\n");
@@ -258,7 +262,7 @@ switch(opcoes_iniciais){
 								strcpy(nome_funcionario, "Kassya Rosa");
 			system("cls");
 			printf("Bem-vindo(a), %s\n\n", nome_funcionario);
-			printf("Deseja saber qual das informações abaixo: \n\n1 - Média da idade dos voluntário\n2 - Média da idade dos clientes\n3 - Quantidade de serviços solicitados");
+			printf("Deseja saber qual das informações abaixo: \n\n1 - Média da idade dos voluntário\n2 - Média da idade dos clientes\n3 - Quantidade de serviços solicitados\n\nInforme a opção desejada: ");
 			scanf("%d", &solicitacao_func);
 			fflush(stdin);
 			
