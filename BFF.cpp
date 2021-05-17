@@ -141,7 +141,6 @@ switch(opcoes_iniciais){
 												else idade_cli[i]=idade_cli[i];
 											}
 											else idade_cli[i]=idade_cli[i];
-							printf("Idade do voluntário: %d", idade_cli[i]);
 							
 							printf("\nInforme o seu CPF [xxx.xxx.xxx-xx]: ");
 							fgets(cpf_cli[i],15,stdin);
@@ -223,7 +222,6 @@ switch(opcoes_iniciais){
 												else idade_vol[i]=idade_vol[i];
 											}
 											else idade_vol[i]=idade_vol[i];
-							printf("Idade do voluntário: %d", idade_vol[i]);
 							
 							printf("\nInforme o seu CPF [xxx.xxx.xxx-xx]: ");
 							fgets(cpf_vol[i],15,stdin);
