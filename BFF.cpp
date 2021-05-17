@@ -34,7 +34,7 @@ char cep_vol[10][9], cep_cli[10][9], cep_func[9], cpf_vol[10][10], cpf_cli[10][1
 
 do{
 printf("*****************************************************************\n");
-printf("*******************BEM-VINDO AO Amigo Tech!*********************\n");	
+printf("****************   Bem-vindo ao Amigo Tech!   *******************\n");	
 printf("*****************************************************************\n\n\n");
 
 printf("Escolha uma das opções abaixo:\n\n");
