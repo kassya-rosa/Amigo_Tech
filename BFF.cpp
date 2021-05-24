@@ -25,22 +25,22 @@ dia=local->tm_mday;
 mes=local->tm_mon+1;
 ano=local->tm_year+1900;
 		
-int i,opcoes_iniciais, opcao_cliente, opcao_voluntario, opcao_funcionario, mat_funcionario, id_vol, id_cli, dia_nasc_vol[10], dia_nasc_cli[10], dia_nasc_func;
-int mes_nasc_vol[10], mes_nasc_cli[10], mes_nasc_func, ano_nasc_vol[10], ano_nasc_cli[10], ano_nasc_func, idade_vol[10], idade_cli[10], idade_func;
+int i=1, j=1,opcoes_iniciais, opcao_cliente, opcao_voluntario, opcao_funcionario, mat_funcionario, id_vol, id_cli, dia_nasc_vol[10], dia_nasc_cli[10];
+int mes_nasc_vol[10], mes_nasc_cli[10], ano_nasc_vol[10], ano_nasc_cli[10];
 int escolha_quipamento, cliente_cadastrado, cadastro_vol, cadastro_cli, qtde_servicos=0, solicitacao_func, opcao_atendimento, informa_fim_atend_cli, informa_fim_atend_vol;
-int aux_idade_vol=0, aux_vol=0, aux_idade_cli=0, aux_cli=0, aux_servico, dta_nasc_cli, dta_nasc_vol, dta_nasc_funci, dia_mes_cli, dia_mes_vol, dia_mes_func;
-int duracao_atend_cli, duracao_atend_vol;
-int dia_atend_cli[i], mes_atend_cli[i], ano_atend_cli[i], hora_atend_cli[i], min_atend_cli[i], seg_atend_cli[i];
-int dia_atend_vol[i], mes_atend_vol[i], ano_atend_vol[i], hora_atend_vol[i], min_atend_vol[i], seg_atend_vol[i];
-int dia_atend_cli_fim[i], mes_atend_cli_fim[i], ano_atend_cli_fim[i], hora_atend_cli_fim[i], min_atend_cli_fim[i], seg_atend_cli_fim[i];
-int dia_atend_vol_fim[i], mes_atend_vol_fim[i], ano_atend_vol_fim[i], hora_atend_vol_fim[i], min_atend_vol_fim[i], seg_atend_vol_fim[i];
-float media_idade_vol, media_idade_cli;
-char sexo_vol[10], sexo_cli[10], menu_princ, sim_nao_vol, sim_nao_cli, sim_nao_func;
-char nome_voluntario[10][100], nome_cliente[10][100], nome_funcionario[100], endereco_vol[10][100], endereco_cli[10][100], endereco_func[100];
-char bairro_vol[10][20], bairro_cli[10][20], bairro_func[20], municipio_vol[10][50], municipio_cli[10][50], municipio_func[50], uf_vol[10][3], uf_cli[10][3], uf_func[3];
-char cep_vol[10][10], cep_cli[10][10], cep_func[10], cpf_vol[10][11], cpf_cli[10][11], cpf_func[11], email_vol[10][100], email_cli[10][100], email_func[100];
+int aux_idade_vol=0, aux_vol=0, aux_idade_cli=0, aux_cli=0, aux_servico, dta_nasc_cli, dta_nasc_vol, dia_mes_cli, dia_mes_vol, nota_vol;
+float duracao_atend_cli=0, duracao_atend_vol=0, media_duracao_atende_vol, media_duracao_atende_cli;
+float hora_atend_cli[10], min_atend_cli[10], seg_atend_cli[10], dur_atend_cli_atual[10], dur_atend_vol_atual[10];
+float hora_atend_vol[10], min_atend_vol[10], seg_atend_vol[10];
+float hora_atend_cli_fim[10], min_atend_cli_fim[10], seg_atend_cli_fim[10];
+float hora_atend_vol_fim[10], min_atend_vol_fim[10], seg_atend_vol_fim[10];
+float media_idade_vol, media_idade_cli, total_nota_vol=0, media_nota_vol, aux_atend_cli=0, aux_atend_vol=0,  idade_vol[10], idade_cli[10];
+char sexo_vol[10], sexo_cli[10], menu_princ, sim_nao_vol, sim_nao_cli, nome_funcionario[16], aux_solicitacao_func;
+char nome_voluntario[10][100], nome_cliente[10][100],endereco_vol[10][100], endereco_cli[10][100];
+char bairro_vol[10][20], bairro_cli[10][20], municipio_vol[10][50], municipio_cli[10][50], uf_vol[10][5], uf_cli[10][5];
+char cep_vol[10][10], cep_cli[10][10], cpf_vol[10][11], cpf_cli[10][11], email_vol[10][100], email_cli[10][100];
 
-do{// do-while para voltar ao menu
+do{// do-while para voltar ao menu principal
 printf("*****************************************************************\n");// constrói o menu para o usuário
 printf("****************   Bem-vindo ao Amigo Tech!   *******************\n");	
 printf("*****************************************************************\n\n\n");
@@ -58,7 +58,12 @@ system("cls"); // limpa a tela do terminal
 
 switch(opcoes_iniciais){ // responsável por permitir o acesso ao próximo menu de opções
 	
-	case 1: printf("Muito bem.\n\nDigite 1 se já for cadastrado\n\nDigite 2 para se cadastrar\n\nInforme a opção desejada: ");
+	case 1: printf("*****************************************************************\n");
+			printf("*************   Amigo Tech! - Portal do Cliente  ****************\n");	
+			printf("*****************************************************************\n\n\n");
+	
+	
+			printf("Muito bem.\n\nDigite 1 se já for cadastrado\n\nDigite 2 para se cadastrar\n\nInforme a opção desejada: ");
 			scanf("%d", &cliente_cadastrado);
 			fflush(stdin);
 			
@@ -66,7 +71,11 @@ switch(opcoes_iniciais){ // responsável por permitir o acesso ao próximo menu de
 			
 			switch(cliente_cadastrado){ // responsável por permitir o acesso ao próximo menu de opções
 				
-				case 1: printf("Entendido!\nVamos encontrar um amigo agora mesmo, mas para isso precisamos saber qual a ajuda que está precisando no momento.\n");
+				case 1: printf("*****************************************************************\n");
+						printf("*************   Amigo Tech! - Portal do Cliente  ****************\n");	
+						printf("*****************************************************************\n\n\n");
+				
+						printf("Entendido!\nVamos encontrar um amigo agora mesmo, mas para isso precisamos saber qual a ajuda que está precisando no momento.\n");
 			
 						printf("Escolha a opção desejada:\n\n");
 						
@@ -82,8 +91,12 @@ switch(opcoes_iniciais){ // responsável por permitir o acesso ao próximo menu de
 								}
 						
 						system("cls");
+						
+						printf("*****************************************************************\n");
+						printf("*************   Amigo Tech! - Portal do Cliente  ****************\n");	
+						printf("*****************************************************************\n\n\n");
 				
-				if(opcao_cliente==1){printf("Para qual equipamento eletrônico necessita auxilio?\n\nComputador? Digite 1");
+							if(opcao_cliente==1){printf("Para qual equipamento eletrônico necessita auxilio?\n\nComputador? Digite 1");
 									printf("\nTV? Digite 2\nCelular? Digite 3\nEletrodomésticos? Digite 4\n\nInforme a opção desejada: ");
 									scanf("%d", &escolha_quipamento);
 									fflush(stdin);
@@ -97,23 +110,20 @@ switch(opcoes_iniciais){ // responsável por permitir o acesso ao próximo menu de
 									
 									qtde_servicos++; // Conta a quantidade de serviços solicitados
 									}																											
-							else { system("cls");
+							else {
 								  printf("Iremos direcionar sua solicitação ao voluntário disponível \ne ele irá entrar em contato pelo seu telefone para agendar o dia e hora de atendimento");
 								  printf("\nObrigado por utilizar os serviços da Amigo Tech!\n");
 								  
 								  qtde_servicos++;}
-						system("cls");
-						printf("Iremos direcionar sua solicitação ao voluntário disponível \ne ele irá entrar em contato pelo seu telefone para agendar o dia e hora de atendimento");
-						printf("\nObrigado por utilizar os serviços da Amigo Tech!\n");break;
+					
+						break;
 			
-				case 2: i = 1;
-				
-						do{	
-						if(i == 1){
-							
-							do{
+				case 2: do{ printf("*****************************************************************\n");
+							printf("*******************  Cadastro de cliente   **********************\n");	
+							printf("*****************************************************************\n\n\n");
 								do{
-									printf("Qual é o seu nome completo?\n"); // Cadastrando o voluntário no sistma
+								   
+									printf("Qual é o seu nome completo?\n"); // Cadastrando o cliente no sistma
 									fgets(nome_cliente[i],100,stdin);
 									fflush(stdin);
 										if(strlen(nome_cliente[i]) <= 6) // strlen: verifica o tamanho da string, se for menor ou igual a 6, apresenta o erro
@@ -146,21 +156,17 @@ switch(opcoes_iniciais){ // responsável por permitir o acesso ao próximo menu de
 								
 								do{
 									printf("\nUF: ");
-									fgets(uf_cli[i],3,stdin);
+									fgets(uf_cli[i],5,stdin);
 									fflush(stdin);
-									
-									printf("\nTamanho UF: %d", strlen(uf_cli[i]));
-									
-										if(strlen(uf_cli[i]) <= 1)
+										if(strlen(uf_cli[i]) <= 2)
 											printf("\nUF inválida!");
-								}while(strlen(uf_cli[i]) <= 1);
+								}while(strlen(uf_cli[i]) <= 2);
 								
 								do{
 									printf("\nCEP [11111-111]: ");
 									fgets(cep_cli[i],10,stdin);
 									fflush(stdin);
 									
-										printf("\nTamanho CEP: %d", strlen(cep_cli[i]));
 										if(strlen(cep_cli[i]) <= 8)
 											printf("\nCEP inválida!");
 								}while(strlen(cep_cli[i]) <= 8);
@@ -242,7 +248,7 @@ switch(opcoes_iniciais){ // responsável por permitir o acesso ao próximo menu de
 									fgets(cpf_cli[i],16,stdin);
 									fflush(stdin);
 										if(strlen(cpf_cli[i]) <= 14)
-											printf("\nCEP inválida!");
+											printf("\nCPF inválido!");
 								}while(strlen(cpf_cli[i]) <= 14);
 								
 								do{	
@@ -250,21 +256,26 @@ switch(opcoes_iniciais){ // responsável por permitir o acesso ao próximo menu de
 									fgets(email_cli[i],100,stdin);
 									fflush(stdin);
 										if(strlen(email_cli[i]) <= 5)
-											printf("\nE-mail inválida!");
+											printf("\nE-mail inválido!");
 								}while(strlen(email_cli[i]) <= 5);
 								
-									aux_idade_cli = aux_idade_cli + idade_cli[i];
-									aux_cli++;
+							system("cls");
+							
+							// Imprime na tela os dados digitados para cadastro do voluntário
+									
+							printf("*****************************************************************\n");
+							printf("*******************  Cadastro de cliente   **********************\n");	
+							printf("*****************************************************************\n\n\n");
 									
 							printf("\nConfira os dados informados:\n\n");
-							printf("\nNome: %s", nome_voluntario[i]);
-							printf("\nCPF: %s", cpf_vol[i]);
-							printf("\nSexo: %c", sexo_vol[i]);
-							printf("\nEndereço: %s - ", endereco_vol[i], bairro_vol[i]);
-							printf("\n%s - %s", municipio_vol[i], uf_vol[i]);
-							printf("\nCEP: %s", cep_vol[i]);							
-							printf("\nData de Nascimento: %d/%d/%d", dia_nasc_vol[i], mes_nasc_vol[i], ano_nasc_vol[i]);							
-							printf("\nE-mail: %s", email_vol[i]);	
+							printf("\nNome: %s", nome_cliente[i]);
+							printf("\nCPF: %s", cpf_cli[i]);
+							printf("\nSexo: %c", sexo_cli[i]);
+							printf("\nEndereço: %s - %s", endereco_cli[i], bairro_cli[i]);
+							printf("\n%s - %s", municipio_cli[i], uf_cli[i]);
+							printf("\nCEP: %s", cep_cli[i]);							
+							printf("\nData de Nascimento: %d/%d/%d", dia_nasc_cli[i], mes_nasc_cli[i], ano_nasc_cli[i]);							
+							printf("\nE-mail: %s", email_cli[i]);	
 							printf("\n\nOs dados informados estão corretos [S|N]? ");
 							scanf("%c", &sim_nao_cli);
 							fflush(stdin);
@@ -276,195 +287,213 @@ switch(opcoes_iniciais){ // responsável por permitir o acesso ao próximo menu de
 									system("cls");}
 						}while(sim_nao_cli == 'N');
 						
-						}
-						i=0;
-						
+						aux_idade_cli = aux_idade_cli + idade_cli[i];
+						aux_cli++;
+							
 						system("cls");
 						
-						printf("Volte ao menu principal para solicitar o serviço como cliente cadastrado\n\n");
+						printf("*****************************************************************\n");
+						printf("*******************  Cadastro de cliente   **********************\n");	
+						printf("*****************************************************************\n\n\n");
 						
-					}while(i==1);
+						printf("Seu número de cadastro é: %d\n", i);
+						
+						printf("\nVolte ao menu principal para solicitar o serviço como cliente cadastrado\n\n");
+					
+						i++;
 				break;	
-				default: printf("Opção inválida!");
+				default: printf("Opção inválida!\n");
 			}
 		;break;
 		
-	case 2: printf("Ok!\nPreciso saber alguns dados...\n\n");
-			i = 1;
+	case 2: do{	printf("*****************************************************************\n");
+				printf("******************  Cadastro de voluntário   ********************\n");	
+				printf("*****************************************************************\n\n\n");
 						
-			do{	
-				if(i == 1){
-						do{	
-							do{
-								printf("Qual é o seu nome completo?\n"); // Cadastrando o voluntário no sistma
-									fgets(nome_voluntario[i],100,stdin);
-									fflush(stdin);
-										if(strlen(nome_voluntario[i]) <= 6) // strlen: verifica o tamanho da string, se for menor ou igual a 6, apresenta o erro
-											printf("\nNome inválido!\n");	// apresenta texto na tela	
-								}while(strlen(nome_voluntario[i]) <= 6);// repetição quando o nome for menor que 5 caracteres
-								
-								do{	
-									printf("\nInforme seu endereço, Logradouro: ");
-									fgets(endereco_vol[i],100,stdin);
-									fflush(stdin);
-										if(strlen(endereco_vol[i]) <= 1)
-											printf("\nLogradouro inválido!");
-								}while(strlen(endereco_vol[i]) <= 1);
-								
-								do{	
-									printf("\nBairro: ");
-									fgets(bairro_vol[i],20,stdin);
-									fflush(stdin);
-										if(strlen(bairro_vol[i]) <= 1)
-											printf("\nBairro inválido!");
-								}while(strlen(bairro_vol[i]) <= 1);
-								
-								do{
-									printf("\nMunicípio: ");
-									fgets(municipio_vol[i],50,stdin);
-									fflush(stdin);
-										if(strlen(municipio_vol[i]) <= 3)
-											printf("\nMunicípio inválido!");
-								}while(strlen(municipio_vol[i]) <= 3);
-								
-								do{
-									printf("\nUF: ");
-									fgets(uf_vol[i],3,stdin);
-									fflush(stdin);
-									
-									printf("\nTamanho UF: %d", strlen(uf_vol[i]));
-									
-										if(strlen(uf_vol[i]) <= 1)
-											printf("\nUF inválida!");
-								}while(strlen(uf_vol[i]) <= 1);
-								
-								do{
-									printf("\nCEP [11111-111]: ");
-									fgets(cep_vol[i],10,stdin);
-									fflush(stdin);
-									
-										printf("\nTamanho CEP: %d", strlen(cep_vol[i]));
-										if(strlen(cep_vol[i]) <= 8)
-											printf("\nCEP inválida!");
-								}while(strlen(cep_vol[i]) <= 8);
-									
-									printf("\nSexo [F|M]: ");
-									scanf("%c", &sexo_vol[i]);
-									fflush(stdin);
-										sexo_vol[i] = toupper(sexo_vol[i]);
-										
-											do{// permite ao usuário corrigir caso tenha informado o valor errado
-												if (sexo_vol[i]!= 'F'&& sexo_vol[i] != 'M'){ 
-												printf("\nSexo inválido!\nInforme[F|M]: ");
-												scanf("%c", &sexo_vol[i]);
-												fflush(stdin);
-												sexo_vol[i] = toupper(sexo_vol[i]);
-											}}while(sexo_vol[i]!= 'F'&& sexo_vol[i] != 'M');
-								
-								do{
-									dia_mes_vol=0;
-									do{	
-										printf("\nDia de nascimento: ");
-										scanf("%d",&dia_nasc_vol[i]);
-										fflush(stdin);
-												if(dia_nasc_vol[i]<1 || dia_nasc_vol[i]>31)
-													printf("\nDia inválido!\n");
-									}while(dia_nasc_vol[i]<1 || dia_nasc_vol[i]>31);
-									
-									do{	
-											printf("\nMês de nascimento: ");
-											scanf("%d", &mes_nasc_vol[i]);
-											fflush(stdin);
-												if(mes_nasc_vol[i]<1 || mes_nasc_vol[i]>12)
-												printf("\nMês inválido!");
-									}while(mes_nasc_vol[i]<1 || mes_nasc_vol[i]>12);
+				printf("Ok!\nPreciso saber alguns dados...\n\n");
+				do{
+					printf("Qual é o seu nome completo?\n"); // Cadastrando o voluntário no sistma
+						fgets(nome_voluntario[j],100,stdin);
+						fflush(stdin);
+							if(strlen(nome_voluntario[j]) <= 6) // strlen: verifica o tamanho da string, se for menor ou igual a 6, apresenta o erro
+								printf("\nNome inválido!\n");	// apresenta texto na tela	
+					}while(strlen(nome_voluntario[j]) <= 6);// repetição quando o nome for menor que 5 caracteres
 					
-										if((mes_nasc_vol[i] == 2|| mes_nasc_vol[i] ==4|| mes_nasc_vol[i] == 6|| mes_nasc_vol[i] == 9|| mes_nasc_vol[i] == 11) && dia_nasc_vol[i] == 31){
-											printf("%d/%d não existe! Tente novamente\n", dia_nasc_vol[i], mes_nasc_vol[i]);
-											dia_mes_vol = 1;}
-											
-										if(mes_nasc_vol[i] == 2 && dia_nasc_vol[i] == 30){
-											printf("%d/%d não existe! Tente novamente\n", dia_nasc_vol[i], mes_nasc_vol[i]);
-											dia_mes_vol = 1;}
-								}while(dia_mes_vol==1);
-								
-								
-								do{
-									dta_nasc_vol=0;
-										printf("\nAno de nascimento[AAAA]: ");
-										scanf("%d", &ano_nasc_vol[i]);
-										fflush(stdin);
-										
-											if(ano_nasc_vol[i]<1910 || ano_nasc_vol[i]>ano-16){
-												printf("\nAno inválido!");
-												dta_nasc_vol = 1;
-											}
-											if (mes_nasc_vol[i] == 2 && dia_nasc_vol[i] ==29){
-												if((( ano_nasc_vol[i] % 4 == 0 && ano_nasc_vol[i] % 100 != 0 ) || ano_nasc_vol[i] % 400 == 0 )){
-												}
-											
-											 else {
-												printf("\n%d/%d/%d não é uma data válida.", dia_nasc_vol[i], mes_nasc_vol[i], ano_nasc_vol[i]);
-												dta_nasc_vol=1;
-											}}
-								}while(dta_nasc_vol==1);
-									
-											// calculando a idade do voluntário
-												idade_vol[i] = ano-ano_nasc_vol[i];
-													
-													if(mes_nasc_vol[i]>mes)
-														idade_vol[i] = idade_vol[i]-1;
-														else if(mes_nasc_vol[i]==mes){
-																if(dia_nasc_vol[i]>dia)
-																idade_vol[i] = idade_vol[i]-1;
-																else idade_vol[i]=idade_vol[i];
-															}
-															else idade_vol[i]=idade_vol[i];
-								do{	
-									printf("\nInforme o seu CPF [xxx.xxx.xxx-xx]: ");
-									fgets(cpf_vol[i],16,stdin);
-									fflush(stdin);
-										if(strlen(cpf_vol[i]) <= 14)
-											printf("\nCEP inválida!");
-								}while(strlen(cpf_vol[i]) <= 14);
-								
-								do{	
-									printf("\nInforme seu e-mail: ");
-									fgets(email_vol[i],100,stdin);
-									fflush(stdin);
-										if(strlen(email_vol[i]) <= 5)
-											printf("\nE-mail inválida!");
-								}while(strlen(email_vol[i]) <= 5);
+					do{	
+						printf("\nInforme seu endereço, Logradouro: ");
+						fgets(endereco_vol[j],100,stdin);
+						fflush(stdin);
+							if(strlen(endereco_vol[j]) <= 1)
+								printf("\nLogradouro inválido!");
+					}while(strlen(endereco_vol[j]) <= 1);
+					
+					do{	
+						printf("\nBairro: ");
+						fgets(bairro_vol[j],20,stdin);
+						fflush(stdin);
+							if(strlen(bairro_vol[j]) <= 1)
+								printf("\nBairro inválido!");
+					}while(strlen(bairro_vol[j]) <= 1);
+					
+					do{
+						printf("\nMunicípio: ");
+						fgets(municipio_vol[j],50,stdin);
+						fflush(stdin);
+							if(strlen(municipio_vol[j]) <= 3)
+								printf("\nMunicípio inválido!");
+					}while(strlen(municipio_vol[j]) <= 3);
+					
+					do{
+						printf("\nUF: ");
+						fgets(uf_vol[j],5,stdin);
+						fflush(stdin);
+							if(strlen(uf_vol[j]) <= 2)
+								printf("\nUF inválida!");
+					}while(strlen(uf_vol[j]) <= 2);
+					
+					do{
+						printf("\nCEP [11111-111]: ");
+						fgets(cep_vol[j],10,stdin);
+						fflush(stdin);
+							if(strlen(cep_vol[j]) <= 8)
+								printf("\nCEP inválida!");
+					}while(strlen(cep_vol[j]) <= 8);
+						
+						printf("\nSexo [F|M]: ");
+						scanf("%c", &sexo_vol[j]);
+						fflush(stdin);
+							sexo_vol[j] = toupper(sexo_vol[j]);
 							
-							aux_idade_vol = aux_idade_vol + idade_vol[i];
-							aux_vol++;
-							
-							printf("\nConfira os dados informados:\n\n");
-							printf("\nNome: %s", nome_voluntario[i]);
-							printf("\nCPF: %s", cpf_vol[i]);
-							printf("\nSexo: %c", sexo_vol[i]);
-							printf("\nEndereço: %s - ", endereco_vol[i], bairro_vol[i]);
-							printf("\n%s - %s", municipio_vol[i], uf_vol[i]);
-							printf("\nCEP: %s", cep_vol[i]);							
-							printf("\nData de Nascimento: %d/%d/%d", dia_nasc_vol[i], mes_nasc_vol[i], ano_nasc_vol[i]);							
-							printf("\nE-mail: %s", email_vol[i]);	
-							printf("\n\nOs dados informados estão corretos [S|N]? ");
-							scanf("%c", &sim_nao_vol);
+								do{// permite ao usuário corrigir caso tenha informado o valor errado
+									if (sexo_vol[j]!= 'F'&& sexo_vol[j] != 'M'){ 
+									printf("\nSexo inválido!\nInforme[F|M]: ");
+									scanf("%c", &sexo_vol[j]);
+									fflush(stdin);
+									sexo_vol[j] = toupper(sexo_vol[j]);
+								}}while(sexo_vol[j]!= 'F'&& sexo_vol[j] != 'M');
+					
+					do{
+						dia_mes_vol=0;
+						do{	
+							printf("\nDia de nascimento: ");
+							scanf("%d",&dia_nasc_vol[j]);
+							fflush(stdin);
+									if(dia_nasc_vol[j]<1 || dia_nasc_vol[j]>31)
+										printf("\nDia inválido!\n");
+						}while(dia_nasc_vol[j]<1 || dia_nasc_vol[j]>31);
+						
+						do{	
+								printf("\nMês de nascimento: ");
+								scanf("%d", &mes_nasc_vol[j]);
+								fflush(stdin);
+									if(mes_nasc_vol[j]<1 || mes_nasc_vol[j]>12)
+									printf("\nMês inválido!");
+						}while(mes_nasc_vol[j]<1 || mes_nasc_vol[j]>12);
+		
+							if((mes_nasc_vol[j] == 2|| mes_nasc_vol[j] ==4|| mes_nasc_vol[j] == 6|| mes_nasc_vol[j] == 9|| mes_nasc_vol[j] == 11) && dia_nasc_vol[j] == 31){
+								printf("%d/%d não existe! Tente novamente\n", dia_nasc_vol[j], mes_nasc_vol[j]);
+								dia_mes_vol = 1;}
+								
+							if(mes_nasc_vol[j] == 2 && dia_nasc_vol[j] == 30){
+								printf("%d/%d não existe! Tente novamente\n", dia_nasc_vol[j], mes_nasc_vol[j]);
+								dia_mes_vol = 1;}
+					}while(dia_mes_vol==1);
+					
+					
+					do{
+						dta_nasc_vol=0;
+							printf("\nAno de nascimento[AAAA]: ");
+							scanf("%d", &ano_nasc_vol[j]);
 							fflush(stdin);
 							
-							sim_nao_vol=toupper(sim_nao_vol);
+								if(ano_nasc_vol[j]<1910 || ano_nasc_vol[j]>ano-16){
+									printf("\nAno inválido!");
+									dta_nasc_vol = 1;
+								}
+								if (mes_nasc_vol[j] == 2 && dia_nasc_vol[j] ==29){
+									if((( ano_nasc_vol[j] % 4 == 0 && ano_nasc_vol[j] % 100 != 0 ) || ano_nasc_vol[j] % 400 == 0 )){
+									}
+								
+								 else {
+									printf("\n%d/%d/%d não é uma data válida.", dia_nasc_vol[j], mes_nasc_vol[j], ano_nasc_vol[j]);
+									dta_nasc_vol=1;
+								}}
+					}while(dta_nasc_vol==1);
+						
+								// calculando a idade do voluntário
+									idade_vol[j] = ano-ano_nasc_vol[j];
+										
+										if(mes_nasc_vol[j]>mes)
+											idade_vol[j] = idade_vol[j]-1;
+											else if(mes_nasc_vol[j]==mes){
+													if(dia_nasc_vol[j]>dia)
+													idade_vol[j] = idade_vol[j]-1;
+													else idade_vol[j]=idade_vol[j];
+												}
+												else idade_vol[j]=idade_vol[j];
+					do{	
+						printf("\nInforme o seu CPF [xxx.xxx.xxx-xx]: ");
+						fgets(cpf_vol[j],16,stdin);
+						fflush(stdin);
+							if(strlen(cpf_vol[j]) <= 14)
+								printf("\nCEP inválida!");
+					}while(strlen(cpf_vol[j]) <= 14);
+					
+					do{	
+						printf("\nInforme seu e-mail: ");
+						fgets(email_vol[j],100,stdin);
+						fflush(stdin);
+							if(strlen(email_vol[j]) <= 5)
+								printf("\nE-mail inválida!");
+					}while(strlen(email_vol[j]) <= 5);
+				
+				system("cls");
+				
+				// Imprime na tela os dados digitados para cadastro do voluntário
+				
+				printf("*****************************************************************\n");
+				printf("******************  Cadastro de voluntário   ********************\n");	
+				printf("*****************************************************************\n\n\n");
+				
+				printf("\nConfira os dados informados:\n\n");
+				printf("\nNome: %s", nome_voluntario[j]);
+				printf("\nCPF: %s", cpf_vol[j]);
+				printf("\nSexo: %c", sexo_vol[j]);
+				printf("\nEndereço: %s - ", endereco_vol[j], bairro_vol[j]);
+				printf("\n%s - %s", municipio_vol[j], uf_vol[j]);
+				printf("\nCEP: %s", cep_vol[j]);							
+				printf("\nData de Nascimento: %d/%d/%d", dia_nasc_vol[j], mes_nasc_vol[j], ano_nasc_vol[j]);							
+				printf("\nE-mail: %s", email_vol[j]);	
+				printf("\n\nOs dados informados estão corretos [S|N]? ");
+				scanf("%c", &sim_nao_vol);
+				fflush(stdin);
+				
+				sim_nao_vol=toupper(sim_nao_vol);
+				
+					if(sim_nao_vol == 'N'){
+						printf("\nFavor preencher novamente");
+						system("cls");}
+			}while(sim_nao_vol == 'N');
 							
-								if(sim_nao_vol == 'N'){
-									printf("\nFavor preencher novamente");
-									system("cls");}
-						}while(sim_nao_vol == 'N');
-							
-				}
-				i=0;
-			}while(i==1);
+			aux_idade_vol = aux_idade_vol + idade_vol[j];
+			aux_vol++;
+			
+			system("cls");
+			
+			printf("*****************************************************************\n");
+			printf("*****************  Cadastro de voluntário   *********************\n");	
+			printf("*****************************************************************\n\n\n");
+			
+			printf("Seu número de cadastro é: %d\n", j);
+		
+			j++;
 			
 			break;
-	case 3: printf("Informe se é cliente ou volutário\n\n1 - CLiente\n\n2 - Voluntário\n\nInforme a opção correta: ");
+	case 3: printf("*****************************************************************\n");
+			printf("***********   Amigo Tech! - Portal de Atendimento  **************\n");	
+			printf("*****************************************************************\n\n\n");
+	
+			printf("Informe se é cliente ou voluntário\n\n1 - Cliente\n\n2 - Voluntário\n\nInforme a opção correta: ");
 			scanf("%d", &opcao_atendimento);
 			fflush(stdin);
 			
@@ -474,117 +503,239 @@ switch(opcoes_iniciais){ // responsável por permitir o acesso ao próximo menu de
 							scanf("%d", &i);
 							fflush(stdin);
 							
-							printf("\nAtendimento iniciado!");
+							system("cls");
 							
+							printf("*****************************************************************\n");
+							printf("***********   Amigo Tech! - Portal de Atendimento  **************\n");	
+							printf("*****************************************************************\n\n\n");
+							
+							printf("Bem-vindo(a), Sr(a) %s\n", nome_cliente[i]);
+							
+							// captura a hora de inicialização do atendimento
 							
 							t= time(NULL);
 							local=localtime(&t);
 							
-							dia_atend_cli[i]=local->tm_mday;
-							mes_atend_cli[i]=local->tm_mon+1;
-							ano_atend_cli[i]=local->tm_year+1900;
 							hora_atend_cli[i]=local->tm_hour;
 							min_atend_cli[i]=local->tm_min;
 							seg_atend_cli[i]=local->tm_sec;
 							
+							printf("\nAtendimento iniciado!\n");
+							
+							system("pause");
+							
 							system("cls");
 							
+							printf("*****************************************************************\n");
+							printf("***********   Amigo Tech! - Portal de Atendimento  **************\n");
+							printf("*****************************************************************\n");
+							printf("***************************  Cliente  ***************************\n");	
+							printf("*****************************************************************\n\n\n");
+							
+							
 							do{							
-								printf("\nPara confirmar a finalização do atendimento digite 1");
+								printf("\nPara confirmar a finalização do atendimento digite 1\n\nDeseja finalizar? ");
 								scanf("%d", &informa_fim_atend_cli);
 								fflush(stdin);
 									if(informa_fim_atend_cli != 1)
-										printf("\nAtendimento não finalizado, digite 1 para finalizar");
+										printf("\nAtendimento não finalizado\n");
 							}while(informa_fim_atend_cli != 1);
+							
+							// captura a hora de finalizalização do atendimento
 							
 							t= time(NULL);
 							local=localtime(&t);
 														
-							dia_atend_cli_fim[i]=local->tm_mday;
-							mes_atend_cli_fim[i]=local->tm_mon+1;
-							ano_atend_cli_fim[i]=local->tm_year+1900;
 							hora_atend_cli_fim[i]=local->tm_hour;
 							min_atend_cli_fim[i]=local->tm_min;
 							seg_atend_cli_fim[i]=local->tm_sec;
 							
-							duracao_atend_cli = (((hora_atend_cli_fim[i]*60)+min_atend_cli_fim[i] +(seg_atend_cli_fim[i]/60))-((hora_atend_cli[i]*60)+min_atend_cli_fim[i]+(seg_atend_cli[i]/60)));
+							duracao_atend_cli =duracao_atend_cli+((hora_atend_cli_fim[i]*60)+min_atend_cli_fim[i]+(seg_atend_cli_fim[i]/60))-((hora_atend_cli[i]*60)+min_atend_cli[i]+(seg_atend_cli[i]/60));
+							
+							dur_atend_cli_atual[i]=  ((hora_atend_cli_fim[i]*60)+min_atend_cli_fim[i]+(seg_atend_cli_fim[i]/60))-((hora_atend_cli[i]*60)+min_atend_cli[i]+(seg_atend_cli[i]/60));
+														
+							system("cls");
+							
+							printf("*****************************************************************\n");
+							printf("***********   Amigo Tech! - Portal de Atendimento  **************\n");
+							printf("*****************************************************************\n");
+							printf("***************************  Cliente  ***************************\n");	
+							printf("*****************************************************************\n\n\n");
+							
+							do{
+								printf("Duração do atendimento: %.1f minutos\n\n\nAvaliação do atendimento Amigo Tech:\n",dur_atend_cli_atual[i]);
+								printf("1 - Péssimo\n2 - Razoável\n3 - Regular\n4 - Bom\n5 - Excelente\n\nInforme a nota para o Amigo Tech: ");
+								scanf("%d", &nota_vol);
+								fflush(stdin);
+									if(nota_vol<1 && nota_vol >5)
+										printf("\nNota Inválida!");
+							}while(nota_vol<1 && nota_vol >5);
+							
+							total_nota_vol = total_nota_vol + nota_vol;
+							
+							aux_atend_cli++;
+							
+							printf("Obrigado por utilizar o Amigo Tech!\n\nAté breve!\n");
+							
 							break;
 							
 					case 2: printf("\nInforme o seu número de cadastro: ");
 							scanf("%d", &i);
 							fflush(stdin);
 							
-							printf("\nAtendimento iniciado!");
+							system("cls");
+							
+							printf("*****************************************************************\n");
+							printf("***********   Amigo Tech! - Portal de Atendimento  **************\n");
+							printf("*****************************************************************\n");
+							printf("*************************  Voluntário  **************************\n");	
+							printf("*****************************************************************\n\n\n");
+							
+							printf("Bem-vindo(a), %s\n", nome_voluntario[j]);
+							
+							// captura a hora de inicialização do atendimento
 							
 							t= time(NULL);
 							local=localtime(&t);
 							
-							dia_atend_vol[i]=local->tm_mday;
-							mes_atend_vol[i]=local->tm_mon+1;
-							ano_atend_vol[i]=local->tm_year+1900;
-							hora_atend_vol[i]=local->tm_hour;
-							min_atend_vol[i]=local->tm_min;
-							seg_atend_vol[i]=local->tm_sec;
+							hora_atend_vol[j]=local->tm_hour;
+							min_atend_vol[j]=local->tm_min;
+							seg_atend_vol[j]=local->tm_sec;
+							
+							printf("\nAtendimento iniciado!\n");
+							
+							system("pause");
 							
 							system("cls");
 							
+							printf("*****************************************************************\n");
+							printf("***********   Amigo Tech! - Portal de Atendimento  **************\n");
+							printf("*****************************************************************\n");
+							printf("*************************  Voluntário  **************************\n");	
+							printf("*****************************************************************\n\n\n");
+							
 							do{							
-								printf("\nPara confirmar a finalização do atendimento digite 1");
+								printf("\nPara confirmar a finalização do atendimento digite 1\n\nDeseja finalizar? ");
 								scanf("%d", &informa_fim_atend_vol);
 								fflush(stdin);
 									if(informa_fim_atend_vol != 1)
-										printf("\nAtendimento não finalizado, digite 1 para finalizar");
+										printf("\nAtendimento não finalizado\n");
 							}while(informa_fim_atend_vol != 1);
+							
+							// captura a hora de finalização do atendimento
 							
 							t= time(NULL);
 							local=localtime(&t);
 							
-							dia_atend_vol_fim[i]=local->tm_mday;
-							mes_atend_vol_fim[i]=local->tm_mon+1;
-							ano_atend_vol_fim[i]=local->tm_year+1900;
-							hora_atend_vol_fim[i]=local->tm_hour;
-							min_atend_vol_fim[i]=local->tm_min;
-							seg_atend_vol_fim[i]=local->tm_sec;
+							hora_atend_vol_fim[j]=local->tm_hour;
+							min_atend_vol_fim[j]=local->tm_min;
+							seg_atend_vol_fim[j]=local->tm_sec;
 							
-							duracao_atend_vol = (((hora_atend_vol_fim[i]*60)+min_atend_vol_fim[i] +(seg_atend_vol_fim[i]/60))-((hora_atend_vol[i]*60)+min_atend_vol_fim[i]+(seg_atend_vol[i]/60)));
+							duracao_atend_vol =duracao_atend_vol+((hora_atend_vol_fim[j]*60)+min_atend_vol_fim[j]+(seg_atend_vol_fim[j]/60))-((hora_atend_vol[j]*60)+min_atend_vol[j]+(seg_atend_vol[j]/60));
+							
+							dur_atend_vol_atual[j] = ((hora_atend_vol_fim[j]*60)+min_atend_vol_fim[j]+(seg_atend_vol_fim[j]/60))-((hora_atend_vol[j]*60)+min_atend_vol[j]+(seg_atend_vol[j]/60));
+							
+							system("cls");
+							
+							printf("*****************************************************************\n");
+							printf("***********   Amigo Tech! - Portal de Atendimento  **************\n");
+							printf("*****************************************************************\n");
+							printf("*************************  Voluntário  **************************\n");	
+							printf("*****************************************************************\n\n\n");
+							
+							printf("Duração do atendimento: %.1f minutos\n\n\nAté o próximo atendimento!\n",dur_atend_vol_atual[j]);
+							
+							aux_atend_vol++;
+							
 							break;
 					default:printf("\nOpção inválida!");
-				};
-	case 4: printf("Favor informar a sua matrícula: ");
+				};break;
+	case 4: printf("*****************************************************************\n");
+			printf("***********   Amigo Tech! - Portal do Funcionário  **************\n");	
+			printf("*****************************************************************\n\n\n");
+	
+			printf("Favor informar a sua matrícula: ");
 			scanf("%d", &mat_funcionario);
 			fflush(stdin);
 			
-			if(mat_funcionario==1)
-				strcpy(nome_funcionario, "Arthur Duarte");
-				else if(mat_funcionario==2)
-					strcpy(nome_funcionario, "Gustavo Guntzel");
-						else if(mat_funcionario==3)
-						strcpy(nome_funcionario, "Igor Ribeiro");
-							else if(mat_funcionario==4)
-							strcpy(nome_funcionario, "Thiago Fernandes");
-								else if(mat_funcionario==5)
-								strcpy(nome_funcionario, "Kassya Rosa");
+			switch(mat_funcionario){
+				case 1: strcpy(nome_funcionario, "Arthur Duarte");break;
+				case 2: strcpy(nome_funcionario, "Gustavo Guntzel");break;
+				case 3: strcpy(nome_funcionario, "Igor Ribeiro");break;
+				case 4: strcpy(nome_funcionario, "Thiago Fernandes");break;
+				case 5: strcpy(nome_funcionario, "Kassya Rosa");break;
+				default:strcpy(nome_funcionario, "");
+			};
+			
 			system("cls");
-			printf("Bem-vindo(a), %s\n\n", nome_funcionario);
-			printf("Deseja saber qual das informações abaixo: \n\n1 - Média da idade dos voluntário\n2 - Média da idade dos clientes\n3 - Quantidade de serviços solicitados\n\nInforme a opção desejada: ");
-			scanf("%d", &solicitacao_func);
-			fflush(stdin);
 			
-			media_idade_vol = aux_idade_vol/aux_vol;
-			media_idade_cli = aux_idade_cli/aux_cli;
+			do{			
+				printf("*****************************************************************\n");
+				printf("***********   Amigo Tech! - Portal do Funcionário  **************\n");	
+				printf("*****************************************************************\n\n\n");
+				
+				printf("Bem-vindo(a), %s\n\n", nome_funcionario);
+				printf("Deseja saber qual das informações abaixo: \n\n");
+				printf("1 - Média da idade dos voluntários\n2 - Média da idade dos clientes\n3 - Quantidade de serviços solicitados");
+				printf("\n4 - Média nota de atendimento dos voluntários\n5 - Duração média atendimento (Visão Clientes)");
+				printf("\n6 - Duração média atendimento (Visão Voluntários)\n\nInforme a opção desejada: ");
+				scanf("%d", &solicitacao_func);
+				fflush(stdin);
+				
+				// Cálculo das ações sobre as informações cadastradas
+				
+				if(aux_vol==0)
+					media_idade_vol=0;
+					else
+						media_idade_vol = aux_idade_vol/aux_vol;
 						
-			if(solicitacao_func==1)
-				printf("\nA média de idade dos voluntários cadastrados é: %.1f\n", media_idade_vol);
-				else if(solicitacao_func==2)
-					printf("\nA média de idade dos clientes cadastrados é: %.1f\n", media_idade_cli);
-					else printf("\nA quantidade de serviços solicitados é: %d\n", qtde_servicos);
+				if(aux_cli==0)
+					media_idade_cli=0;
+					else
+						media_idade_cli = aux_idade_cli/aux_cli;
+						
+				if(aux_atend_cli==0)
+					media_nota_vol=0;
+					else 
+						media_nota_vol = total_nota_vol/aux_atend_cli;
+						
+				if(aux_atend_cli==0)
+					media_duracao_atende_cli=0;
+					else 
+						media_duracao_atende_cli = duracao_atend_cli/aux_atend_cli;
 					
-			system("pause");
+				if(aux_atend_vol==0)
+					media_duracao_atende_vol=0;
+					else 
+						media_duracao_atende_vol = duracao_atend_vol/aux_atend_vol;
+						
+				switch(solicitacao_func){
+					case 1:printf("\nA média de idade dos voluntários cadastrados é: %.1f\n", media_idade_vol);break;
+					case 2:printf("\nA média de idade dos clientes cadastrados é: %.1f\n", media_idade_cli);break;
+					case 3:printf("\nA quantidade de serviços solicitados é: %d\n", qtde_servicos);break;
+					case 4:printf("\nA nota média de avaliação dos voluntários é: %.1f\n", media_nota_vol);break;
+					case 5:printf("\nA duração média de atendimento na visão Cliente é: %.1f\n minutos", media_duracao_atende_cli);break;
+					case 6:printf("\nA duração média de atendimento na visão Voluntários é: %.1f\n minutos", media_duracao_atende_vol);break;
+					default:printf("Opção inválida!");
+				}
+				
+				do{
+					printf("\nDeseja voltar ao menu do funcionário ?[S|N]");
+					scanf("%c", &aux_solicitacao_func);
+					fflush(stdin);
+					aux_solicitacao_func = toupper(aux_solicitacao_func); //Converte o caractere em maiúsculo
+					if(aux_solicitacao_func != 'S' && aux_solicitacao_func != 'N')
+						printf("\nOpção inválida!");
+				}while(aux_solicitacao_func != 'S' && aux_solicitacao_func != 'N');	
 			
-			break;
+			system("cls");
+				
+			}while(aux_solicitacao_func != 'N');
+						
+	break;
 	default: printf("Opção Inválida!\n");
 			
-			}
+	}
 
 system("pause");
 system("cls");
@@ -593,18 +744,15 @@ system("cls");
 			printf("\nDeseja voltar ao menu principal ?[S|N]\n");
 			scanf("%c", &menu_princ);
 			fflush(stdin);
-			menu_princ = toupper(menu_princ); //Converte o caractere em maiúsculo
+			menu_princ = toupper(menu_princ);
 			if(menu_princ != 'S' && menu_princ != 'N')
 				printf("\nOpção inválida!");
 		}while(menu_princ != 'S' && menu_princ != 'N');	
 		
-		i++;		
-	
 	system("cls");
 	
 }while(menu_princ=='S');
 
-system("pause");
 system("cls");
 
 printf("Programa finalizado");
