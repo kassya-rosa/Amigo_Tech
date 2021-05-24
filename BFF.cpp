@@ -24,6 +24,8 @@ int dia, mes, ano;
 dia=local->tm_mday;
 mes=local->tm_mon+1;
 ano=local->tm_year+1900;
+
+// nomes de variavel com significado (Código limpo)
 		
 int i=1, j=1,opcoes_iniciais, opcao_cliente, opcao_voluntario, opcao_funcionario, mat_funcionario, id_vol, id_cli, dia_nasc_vol[10], dia_nasc_cli[10];
 int mes_nasc_vol[10], mes_nasc_cli[10], ano_nasc_vol[10], ano_nasc_cli[10];
@@ -39,6 +41,8 @@ char sexo_vol[10], sexo_cli[10], menu_princ, sim_nao_vol, sim_nao_cli, nome_func
 char nome_voluntario[10][100], nome_cliente[10][100],endereco_vol[10][100], endereco_cli[10][100];
 char bairro_vol[10][20], bairro_cli[10][20], municipio_vol[10][50], municipio_cli[10][50], uf_vol[10][5], uf_cli[10][5];
 char cep_vol[10][10], cep_cli[10][10], cpf_vol[10][11], cpf_cli[10][11], email_vol[10][100], email_cli[10][100];
+
+// Utilizando o máximo de repetição para diminuir o tamanho do código (Código limpo)
 
 do{// do-while para voltar ao menu principal
 printf("*****************************************************************\n");// constrói o menu para o usuário
@@ -69,7 +73,7 @@ switch(opcoes_iniciais){ // responsável por permitir o acesso ao próximo menu de
 			
 			system("cls");
 			
-			switch(cliente_cadastrado){ // responsável por permitir o acesso ao próximo menu de opções
+			switch(cliente_cadastrado){ 
 				
 				case 1: printf("*****************************************************************\n");
 						printf("*************   Amigo Tech! - Portal do Cliente  ****************\n");	
@@ -101,7 +105,7 @@ switch(opcoes_iniciais){ // responsável por permitir o acesso ao próximo menu de
 									scanf("%d", &escolha_quipamento);
 									fflush(stdin);
 									
-									while(escolha_quipamento<1 && escolha_quipamento>4){// permite ao usuário corrigir caso tenho informado o valor errado	
+									while(escolha_quipamento<1 && escolha_quipamento>4){
 										if(escolha_quipamento<1 && escolha_quipamento>4)
 											printf("Opção Inválida!\n\nInforme a opção desejada: ");
 											scanf("%d", &escolha_quipamento);
@@ -232,7 +236,7 @@ switch(opcoes_iniciais){ // responsável por permitir o acesso ao próximo menu de
 											}}
 								}while(dta_nasc_cli==1);
 									
-											// calculando a idade do voluntário
+											// calculando a idade do cliente
 												idade_cli[i] = ano-ano_nasc_cli[i];
 													
 													if(mes_nasc_cli[i]>mes)
@@ -261,7 +265,7 @@ switch(opcoes_iniciais){ // responsável por permitir o acesso ao próximo menu de
 								
 							system("cls");
 							
-							// Imprime na tela os dados digitados para cadastro do voluntário
+							// Imprime na tela os dados digitados para cadastro do cliente
 									
 							printf("*****************************************************************\n");
 							printf("*******************  Cadastro de cliente   **********************\n");	
