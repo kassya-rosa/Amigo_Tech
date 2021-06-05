@@ -40,7 +40,7 @@ float media_idade_vol, media_idade_cli, total_nota_vol=0, media_nota_vol, aux_at
 char sexo_vol[10], sexo_cli[10], menu_princ, sim_nao_vol, sim_nao_cli, nome_funcionario[16], aux_solicitacao_func;
 char nome_voluntario[10][100], nome_cliente[10][100],endereco_vol[10][100], endereco_cli[10][100];
 char bairro_vol[10][20], bairro_cli[10][20], municipio_vol[10][50], municipio_cli[10][50], uf_vol[10][5], uf_cli[10][5];
-char cep_vol[10][10], cep_cli[10][10], cpf_vol[10][11], cpf_cli[10][11], email_vol[10][100], email_cli[10][100];
+char cep_vol[10][10], cep_cli[10][10], cpf_vol[10][11], cpf_cli[10][11], email_vol[10][100], email_cli[10][100], tel_vol[10][100], tel_cli[10][100];
 
 // Utilizando o máximo de repetição para diminuir o tamanho do código (Código limpo)
 
@@ -133,6 +133,14 @@ switch(opcoes_iniciais){ // responsável por permitir o acesso ao próximo menu de
 										if(strlen(nome_cliente[i]) <= 6) // strlen: verifica o tamanho da string, se for menor ou igual a 6, apresenta o erro
 											printf("\nNome inválido!\n");	// apresenta texto na tela	
 								}while(strlen(nome_cliente[i]) <= 6);// repetição quando o nome for menor que 5 caracteres
+								
+								do{	
+									printf("\nInforme seu telefone para contato com DDD: ");
+									fgets(tel_cli[i],11,stdin);
+									fflush(stdin);
+										if(strlen(tel_cli[i]) <= 10)
+											printf("\nLogradouro inválido!");
+								}while(strlen(tel_cli[i]) <= 10);
 								
 								do{	
 									printf("\nInforme seu endereço, Logradouro: ");
@@ -273,6 +281,7 @@ switch(opcoes_iniciais){ // responsável por permitir o acesso ao próximo menu de
 									
 							printf("\nConfira os dados informados:\n\n");
 							printf("\nNome: %s", nome_cliente[i]);
+							printf("\nTelefone: %s", tel_cli[i]);
 							printf("\nCPF: %s", cpf_cli[i]);
 							printf("\nSexo: %c", sexo_cli[i]);
 							printf("\nEndereço: %s - %s", endereco_cli[i], bairro_cli[i]);
@@ -322,6 +331,14 @@ switch(opcoes_iniciais){ // responsável por permitir o acesso ao próximo menu de
 							if(strlen(nome_voluntario[j]) <= 6) // strlen: verifica o tamanho da string, se for menor ou igual a 6, apresenta o erro
 								printf("\nNome inválido!\n");	// apresenta texto na tela	
 					}while(strlen(nome_voluntario[j]) <= 6);// repetição quando o nome for menor que 5 caracteres
+					
+					do{	
+						printf("\nInforme seu telefone para contato com DDD: ");
+						fgets(tel_vol[i],11,stdin);
+						fflush(stdin);
+							if(strlen(tel_vol[i]) <= 10)
+								printf("\nLogradouro inválido!");
+					}while(strlen(tel_vol[i]) <= 10);
 					
 					do{	
 						printf("\nInforme seu endereço, Logradouro: ");
@@ -461,6 +478,7 @@ switch(opcoes_iniciais){ // responsável por permitir o acesso ao próximo menu de
 				
 				printf("\nConfira os dados informados:\n\n");
 				printf("\nNome: %s", nome_voluntario[j]);
+				printf("\nTelefone: %s", tel_vol[j]);
 				printf("\nCPF: %s", cpf_vol[j]);
 				printf("\nSexo: %c", sexo_vol[j]);
 				printf("\nEndereço: %s - ", endereco_vol[j], bairro_vol[j]);
