@@ -28,7 +28,8 @@ ano=local->tm_year+1900;
 // nomes de variavel com significado (Código limpo)
 		
 int i=1, j=1,opcoes_iniciais, opcao_cliente, opcao_voluntario, opcao_funcionario, mat_funcionario, id_vol, id_cli, dia_nasc_vol[10], dia_nasc_cli[10];
-int mes_nasc_vol[10], mes_nasc_cli[10], ano_nasc_vol[10], ano_nasc_cli[10],tel_vol[100], tel_cli[100];
+int mes_nasc_vol[10], mes_nasc_cli[10], ano_nasc_vol[10], ano_nasc_cli[10],codigo_cli_cadastrado;
+char tel_vol[10][15], tel_cli[10][15];
 int escolha_quipamento, cliente_cadastrado, cadastro_vol, cadastro_cli, qtde_servicos=0, solicitacao_func, opcao_atendimento, informa_fim_atend_cli, informa_fim_atend_vol;
 int aux_idade_vol=0, aux_vol=0, aux_idade_cli=0, aux_cli=0, aux_servico, dta_nasc_cli, dta_nasc_vol, dia_mes_cli, dia_mes_vol, nota_vol;
 float duracao_atend_cli=0, duracao_atend_vol=0, media_duracao_atende_vol, media_duracao_atende_cli;
@@ -37,7 +38,7 @@ float hora_atend_vol[10], min_atend_vol[10], seg_atend_vol[10];
 float hora_atend_cli_fim[10], min_atend_cli_fim[10], seg_atend_cli_fim[10];
 float hora_atend_vol_fim[10], min_atend_vol_fim[10], seg_atend_vol_fim[10];
 float media_idade_vol, media_idade_cli, total_nota_vol=0, media_nota_vol, aux_atend_cli=0, aux_atend_vol=0,  idade_vol[10], idade_cli[10];
-char sexo_vol[10], sexo_cli[10], menu_princ, sim_nao_vol, sim_nao_cli, nome_funcionario[16], aux_solicitacao_func;
+char sexo_vol[10], sexo_cli[10], menu_princ, sim_nao_vol, sim_nao_cli, nome_funcionario[16], aux_solicitacao_func, sair_cli_cadastrado;
 char nome_voluntario[10][100], nome_cliente[10][100],endereco_vol[10][100], endereco_cli[10][100];
 char bairro_vol[10][20], bairro_cli[10][20], municipio_vol[10][50], municipio_cli[10][50], uf_vol[10][5], uf_cli[10][5];
 char cep_vol[10][10], cep_cli[10][10], cpf_vol[10][11], cpf_cli[10][11], email_vol[10][100], email_cli[10][100];
@@ -78,14 +79,40 @@ switch(opcoes_iniciais){ // responsável por permitir o acesso ao próximo menu de
 				case 1: printf("*****************************************************************\n");
 						printf("*************   Amigo Tech! - Portal do Cliente  ****************\n");	
 						printf("*****************************************************************\n\n\n");
+						
+						do{
+						
+							printf("Informe o seu código do cliente: ");
+							scanf("%d", &codigo_cli_cadastrado);
+							fflush(stdin);
+					
+								if(strlen(nome_cliente[codigo_cli_cadastrado])>5)
+									break;
+								else {
+									printf("\n\n\Cliente não existe");}
+									
+							printf("\nTentar novamente?[S|N]\n");// opção de entrar com outro código de cliente
+							scanf("%c", &sair_cli_cadastrado);
+							fflush(stdin);
+							
+							sair_cli_cadastrado = toupper(sair_cli_cadastrado);
+							
+								if(sair_cli_cadastrado=='N')
+									break;
+								
+						}while(strlen(nome_cliente[codigo_cli_cadastrado])>5);
 				
-						printf("Entendido!\nVamos encontrar um amigo agora mesmo, mas para isso precisamos saber qual a ajuda que está precisando no momento.\n");
+						if(sair_cli_cadastrado=='N')
+							break;
+				
+						printf("Bem-vindo, %s\n\nVamos encontrar um amigo agora mesmo, mas para isso precisamos saber qual a ajuda que está precisando no momento.\n\n", nome_cliente[codigo_cli_cadastrado]);
 			
 						printf("Escolha a opção desejada:\n\n");
 						
 						printf("Utilização de equipamentos eletrônicos\nDigite 1\n\nNavegar na Web\nDigite 2\n\nInstalação de equipamentos\nDigite 3\n\nCompanhia para jogos ou bate-papo\nDigite 4\n\nInforme a opção desejada: ");
 						scanf("%d", &opcao_cliente);
 						fflush(stdin);
+														
 							
 							while(opcao_cliente<1 && opcao_cliente>4){// permite ao usuário corrigir caso tenho informado o valor errado	
 								if(opcao_cliente<1 && opcao_cliente>4)
@@ -115,8 +142,8 @@ switch(opcoes_iniciais){ // responsável por permitir o acesso ao próximo menu de
 									qtde_servicos++; // Conta a quantidade de serviços solicitados
 									}																											
 							else {
-								  printf("Iremos direcionar sua solicitação ao voluntário disponível \ne ele irá entrar em contato pelo seu telefone para agendar o dia e hora de atendimento");
-								  printf("\nObrigado por utilizar os serviços da Amigo Tech!\n");
+								  printf("\n\nIremos direcionar sua solicitação ao voluntário disponível \ne ele irá entrar em contato pelo seu telefone para agendar o dia e hora de atendimento");
+								  printf("\nObrigado por utilizar os serviços da Amigo Tech!\n\n");
 								  
 								  qtde_servicos++;}
 					
@@ -136,11 +163,13 @@ switch(opcoes_iniciais){ // responsável por permitir o acesso ao próximo menu de
 								
 								do{	
 									printf("\nInforme seu telefone para contato com DDD: ");
-									scanf("%d", &tel_cli[i]);
+									fgets(tel_cli[i],15,stdin);
 									fflush(stdin);
-										if(tel_cli[i] <= 10)
+									
+									printf("\n\nTelefone: %s", tel_cli[i]);
+										if(strlen(tel_cli[i]) <= 9)
 											printf("\nTelefone inválido!");
-								}while(tel_cli[i] <= 10);
+								}while(strlen(tel_cli[i]) <= 9);
 								
 								do{	
 									printf("\nInforme seu endereço, Logradouro: ");
@@ -281,7 +310,7 @@ switch(opcoes_iniciais){ // responsável por permitir o acesso ao próximo menu de
 									
 							printf("\nConfira os dados informados:\n\n");
 							printf("\nNome: %s", nome_cliente[i]);
-							printf("\nTelefone: %d", tel_cli[i]);
+							printf("\nTelefone: %s", tel_cli[i]);
 							printf("\nCPF: %s", cpf_cli[i]);
 							printf("\nSexo: %c", sexo_cli[i]);
 							printf("\nEndereço: %s - %s", endereco_cli[i], bairro_cli[i]);
@@ -334,11 +363,13 @@ switch(opcoes_iniciais){ // responsável por permitir o acesso ao próximo menu de
 					
 					do{	
 						printf("\nInforme seu telefone para contato com DDD: ");
-						scanf("%d", &tel_cli[i]);
+						fgets(tel_vol[i],15,stdin);
 						fflush(stdin);
-							if(tel_cli[i] <= 10)
+						
+						printf("\n\nTelefone: %s", tel_vol[i]);
+							if(strlen(tel_vol[i]) <= 9)
 								printf("\nTelefone inválido!");
-					}while(tel_cli[i] <= 10);
+					}while(strlen(tel_vol[i]) <= 9);
 					
 					do{	
 						printf("\nInforme seu endereço, Logradouro: ");
@@ -478,7 +509,7 @@ switch(opcoes_iniciais){ // responsável por permitir o acesso ao próximo menu de
 				
 				printf("\nConfira os dados informados:\n\n");
 				printf("\nNome: %s", nome_voluntario[j]);
-				printf("\nTelefone: %d", tel_vol[j]);
+				printf("\nTelefone: %s", tel_vol[j]);
 				printf("\nCPF: %s", cpf_vol[j]);
 				printf("\nSexo: %c", sexo_vol[j]);
 				printf("\nEndereço: %s - ", endereco_vol[j], bairro_vol[j]);
@@ -681,11 +712,10 @@ switch(opcoes_iniciais){ // responsável por permitir o acesso ao próximo menu de
 			fflush(stdin);
 			
 			switch(mat_funcionario){
-				case 1: strcpy(nome_funcionario, "Arthur Duarte");break;
-				case 2: strcpy(nome_funcionario, "Gustavo Guntzel");break;
-				case 3: strcpy(nome_funcionario, "Igor Ribeiro");break;
-				case 4: strcpy(nome_funcionario, "Thiago Fernandes");break;
-				case 5: strcpy(nome_funcionario, "Kassya Rosa");break;
+				case 1: strcpy(nome_funcionario, "Gustavo Guntzel");break;
+				case 2: strcpy(nome_funcionario, "Igor Ribeiro");break;
+				case 3: strcpy(nome_funcionario, "Thiago Fernandes");break;
+				case 4: strcpy(nome_funcionario, "Kassya Rosa");break;
 				default:strcpy(nome_funcionario, "");
 			};
 			
